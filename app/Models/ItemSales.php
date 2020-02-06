@@ -18,10 +18,15 @@ class ItemSales extends Model
     ];
 
     public function item(){
-        $this->belongsTo('App\Models\Inventory');
+        return $this->belongsTo('App\Models\Inventory','item_id');
     }
 
     public function service(){
-        $this->belongsTo('App\Models\Service');
+        return $this->belongsTo('App\Models\Servicing', 'service_id');
+    }
+
+    public function user_id(){
+        $user_id = \Auth::user()->getUserInfo()['sub'];
+        return $user_id;
     }
 }

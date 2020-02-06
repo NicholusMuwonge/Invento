@@ -17,8 +17,9 @@ Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback' )->name('a
 Route::get('/login', 'Auth\Auth0IndexController@login')->name('login');
 Route::get('/logout', 'Auth\Auth0IndexController@logout')->name('logout')->middleware('auth');
 
-Route::group(['prefix' => 'dashboard'], function() {
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::view('/', 'dashboard/dashboard');
-    Route::get('sale/create/{id}', 'SaleController@create');
     Route::resource('sale', 'SaleController')->except('create');
+    Route::post('sale/create/', 'SaleController@create');
+    
 });

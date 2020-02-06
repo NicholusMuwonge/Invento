@@ -1,89 +1,49 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Invento</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Invento
+<!-- resources/views/home.blade.php -->
+<!-- Specify that we want to extend the index file -->
+@extends('index')
+<!-- Set the title content to "Home" -->
+@section('title', 'Home')
+<!-- Set the "content" section, which will replace "@yield('content')" in the index file we're extending -->
+@section('content')
+<div class="jumbotron text-light" style="background-image: url('https://source.unsplash.com/1800x900/?beach')">
+  <div class="container">
+    @if(Auth::user())
+      <h1 class="display-4">Welcome back, {{ Auth::user()->nickname}}!</h1>
+      <p class="lead">To your one stop shop for sale management.</p>
+      <a href="/dashboard" class="btn btn-success btn-lg my-2">View your Dashboard</a>
+    @else
+      <h1 class="display-3">sale management made easy.</h1>
+      <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam in quia natus magnam ducimus quas molestias velit vero maiores. Eaque sunt laudantium voluptas. Fugiat molestiae ipsa delectus iusto vel quod.</p>
+      <a href="/login" class="btn btn-success btn-lg my-2">Sign Up for Access to our services</a>
+    @endif              
+  </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Convenient</h5>
+                    <p class="card-text">Manage all your car repairs</p>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Best prices</h5>
+                    <p class="card-text">We have the best prices around town</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Easy to use</h5>
+                    <p class="card-text">Book and manage with the click of a button</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
