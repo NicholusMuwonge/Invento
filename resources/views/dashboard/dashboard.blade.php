@@ -17,7 +17,7 @@
             <div class="card-body">
                 <h4 class="card-title">Receive our services</h4>
                 <p class="card-text">Browse our catalog of top-rated services.</p>
-                <a href="/dashboard/sale/create" class="btn btn-primary">Our Services</a>
+                <a href="/dashboard/sale/create" class="btn btn-primary">Add Sale</a>
             </div>
             </div>
         </div>

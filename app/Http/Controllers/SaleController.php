@@ -28,7 +28,9 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('dashboard.saleCreate');
+        $service=Servicing::all();
+        $item=Inventory::all();
+        return view('dashboard.saleCreate', compact('service','item'));
     }
 
     /**
@@ -42,7 +44,22 @@ class SaleController extends Controller
         // define user id from Auth0
         $user_id = \Auth::user()->getUserInfo()['sub'];
         $request->request->add(['user_id' => $user_id]);
-        ItemSales::create($request->all());
+        $request->validate([
+            'item_id'=>'required',
+            'service_id'=>'required',
+            'type'=>'required'
+        ]);
+
+        $sale = new ItemSales([
+            'item_id' => $request->get('item_id'),
+            'service_id' => $request->get('service_id'),
+            'type' => $user_id,
+            'user_id' => $request->get('user_id'),
+            'quantity' => $request->get('quantity'),
+            'total_cost' => $request->get('total_cost')
+        ]);
+        $sale->save();
+        // ItemSales::create($request->all());
 
         return redirect('dashboard/sale')->with('success', 'Sale created!');
     }
@@ -55,13 +72,13 @@ class SaleController extends Controller
      */
     public function show($id)
     {
-        $sale = ItemSales::with("service","item")->where('id',$id)->get();
-        $user_id = \Auth::user()->getUserInfo()['sub'];
-        $item_id = $sale->item->id;
-        $service_id = $sale->service->id;
-        $itemInfo = Inventory::with('id')->get()->find($item_id);
-        $serviceInfo = Servicing::with('id')->get()->find($service_id);
-        return view('dashboard.saleSingle', compact('sale', 'user_id'));
+        // $sale = ItemSales::where("id",$id)->get();
+        // $user_id = \Auth::user()->getUserInfo()['sub'];
+        // $item_id = $sale->item->id;
+        // $service_id = $sale->service->id;
+        // $itemInfo = Inventory::with('id')->get()->find($item_id);
+        // $serviceInfo = Servicing::with('id')->get()->find($service_id);
+        // return view('dashboard.saleSingle', compact('sale', 'user_id'));
     }
 
     /**

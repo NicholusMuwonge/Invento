@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="card">
         <div class="card-header">
-            <h2>{{ $sale->item_id->code }} - <small class="text-muted">{{ $sale->service_id->code }}</small></h2>
+            Sale Creation
         </div>
         <div class="card-body">
             <h5 class="card-title"></h5>
@@ -14,32 +14,45 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <label for="room">Sale Type</label>
-                            <select class="form-control" name="room_id" value="{{ old('type', $sale->type) }}">
-                                    <option value="{{$sale->id}}">{{ $sale->type }} </option>
+                            <label for="first_name">Item Code:</label>
+                            <select class="form-control{{ $errors->has('item_id') ? ' is-invalid' : '' }}" name="dropdown" required>
+                                @foreach($item as $item)
+                                <option id="item_select" value="{{ $item->id }}">{{ $item->code }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="guests">Quantity</label>
-                            <input class="form-control" name="num_of_guests" value="{{ old('quantity', $sale->quantity) }}">
+                            <label for="first_name">Service:</label>
+                            <select class="form-control{{ $errors->has('item_id') ? ' is-invalid' : '' }}" name="dropdown" >
+                                @foreach($service as $item)
+                                <option value="{{ $item->id }}">{{ $item->code }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="arrival">Total Cost</label>
-                            <input type="date" class="form-control" name="total_cost" placeholder="cost" value="{{ old('total_cost', $sale->total_cost) }}">
+                            <label for="first_name">Type:</label>
+                            {!! Form::select('role', ['type' => 'sale','service','both'], 'Type', ['class' => 'form-control','required']) !!}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="departure">Quantity</label>
-                            <input type="date" class="form-control" name="quantity" placeholder="quantity" value="{{ old('quantity', $sale->quantity) }}">
+                            <label for="first_name">Quantity:</label>
+                            <input type="text" class="form-control" name="quantity" required />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="first_name">Cost:</label>
+            
+                            <input type="text" class="form-control" name="total_cost" required />
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary">Book it</button>
+                <button type="submit" class="btn btn-lg btn-primary">Create Sale</button>
             </form>
         </div>
     </div>

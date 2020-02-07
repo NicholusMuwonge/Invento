@@ -19,7 +19,6 @@ Route::get('/logout', 'Auth\Auth0IndexController@logout')->name('logout')->middl
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::view('/', 'dashboard/dashboard');
-    Route::resource('sale', 'SaleController')->except('create');
-    Route::post('sale/create/', 'SaleController@create');
-    
+    Route::resource('sale', 'SaleController');
+    Route::get('sale/create/', 'SaleController@create');
 });
