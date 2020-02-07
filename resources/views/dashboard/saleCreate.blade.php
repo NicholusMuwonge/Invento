@@ -15,9 +15,9 @@
                     <div class="col-sm-8">
                         <div class="form-group">
                             <label for="first_name">Item Code:</label>
-                            <select class="form-control{{ $errors->has('item_id') ? ' is-invalid' : '' }}" name="dropdown" required>
+                            <select class="form-control" name="dropdown" required>
                                 @foreach($item as $item)
-                                <option id="item_select" value="{{ $item->id }}">{{ $item->code }}</option>
+                                <option id="item_select" value="{{ $item['id'] }}">{{ $item->code }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -25,9 +25,9 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="first_name">Service:</label>
-                            <select class="form-control{{ $errors->has('item_id') ? ' is-invalid' : '' }}" name="dropdown" >
+                            <select class="form-control" name="dropdown" >
                                 @foreach($service as $item)
-                                <option value="{{ $item->id }}">{{ $item->code }}</option>
+                                <option value="{{ $item['id'] }}">{{ $item->code }}</option>
                                 @endforeach
                             </select>
                         </div>

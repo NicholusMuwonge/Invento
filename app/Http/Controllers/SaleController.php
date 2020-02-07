@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ItemSales;
 use App\Models\Servicing;
 use App\Models\Inventory;
+use Illuminate\Contracts\Session\Session;
 
 class SaleController extends Controller
 {
@@ -16,9 +17,9 @@ class SaleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $user_id = \Auth::user()->getUserInfo()['sub'];
-        $sales = ItemSales::with("service","item")->where('user_id',$user_id)->get();
-        return view('dashboard.sales')->with('sales', $sales);
+    {   $user_id = \Auth::user()->getUserInfo();
+        $sales = ItemSales::all();
+        return view('dashboard.sales', compact('user_id'))->with('sales', $sales);
     }
 
     /**

@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h4 class="card-title">Manage your sales</h4>
                 <p class="card-text">Modify your current sales.</p>
-                <a href="/dashboard/sales" class="btn btn-primary">My sales</a>
+                <a href="/dashboard/sale" class="btn btn-primary">My sales</a>
             </div>
             </div>
         </div>
